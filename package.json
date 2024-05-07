@@ -19,6 +19,7 @@
   "description": "CHAT en tiempo real desarrollado con HTML,CSS,Nodejs y Socket.io",
   "dependencies": {
     "express": "4.19.2",
-    "morgan": "1.10.0"
+    "morgan": "1.10.0",
+    "socket.io": "4.7.5"
   }
 }

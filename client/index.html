@@ -4,6 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>rodrisChat</title>
+    <script type="module">
+      import { io } from 'https://cdn.socket.io/4.7.5/socket.io.esm.min.js'
+      const socket = io()
+
+      const form = document.getElementById('form')
+      const input = document.getElementById('input')
+      const messages = document.getElementById('messages')
+
+      socket.on('chat message', (msg) => {
+        const liElement = document.createElement('li')
+        liElement.innerText = msg
+        messages.insertAdjacentElement('beforeend', liElement)
+      })
+
+      //   socket.on('online', (data) => {
+      //     console.log(data)
+      //   })
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        if (input.value) {
+          socket.emit('chat message', input.value)
+          input.value = ''
+        }
+      })
+    </script>
     <style>
       *,
       *::after,
@@ -23,7 +49,7 @@
         display: grid;
         place-content: center;
         height: 100vh;
-        padding: 36px;
+        padding: 36px 36px 100px 36px;
         grid-template-rows: 1fr;
       }
 
@@ -35,10 +61,55 @@
         width: 450px;
         position: relative;
       }
+
+      #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      #messages > li {
+        padding: 0.5rem 1rem;
+      }
+
+      #messages > li:nth-child(odd) {
+        background: #292929;
+      }
+
+      #form {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        height: 48px;
+        left: 0;
+        padding: 4px;
+        right: 0;
+      }
+      #input {
+        border-radius: 9999px;
+        border: 1px solid #eee;
+        flex: 1;
+        margin: 4px;
+        padding: 0 8px;
+      }
+      #input:focus {
+        outline: 0;
+      }
+      #form > button {
+        background: #09f;
+        color: #fff;
+        border: 0;
+        margin: 4px;
+        border-radius: 4px;
+      }
+      #form > button:hover {
+        background: #0cf;
+      }
     </style>
   </head>
   <body>
     <section id="chat">
+      <ul id="messages"></ul>
       <form id="form">
         <input
           type="text"
