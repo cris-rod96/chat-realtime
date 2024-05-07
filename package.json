@@ -1,0 +1,23 @@
+{
+  "name": "chat-realtime",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch ./server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "HTML",
+    "CSS",
+    "Socket.io",
+    "Nodejs",
+    "npm"
+  ],
+  "author": "@cris-rod96",
+  "license": "ISC",
+  "description": "CHAT en tiempo real desarrollado con HTML,CSS,Nodejs y Socket.io",
+  "dependencies": {
+    "express": "4.19.2"
+  }
+}
